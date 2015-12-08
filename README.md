@@ -13,5 +13,5 @@ gradle build - builds your project
 gradle clean - deletes the build directory
 gradle assemble - compiles and jars your code, but does not run the unit tests
 gradle check - compiles and tests your code
-
+gradle uploadArchives - publish the JAR file according to build.gradle file
 
