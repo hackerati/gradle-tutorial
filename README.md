@@ -6,6 +6,7 @@ https://docs.gradle.org/current/userguide/tutorial_java_projects.html
 Directory structure as expected by Gradle
 
 mkdir -p src/main/java
+mkdir -p src/main/resources
 mkdir -p src/test/java
 mkdir -p src/test/resources
 
