@@ -29,3 +29,5 @@ uploadArchives {
                   }
         }
 }
+
+apply plugin: 'eclipse'
