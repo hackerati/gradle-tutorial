@@ -21,3 +21,11 @@ jar {
 test {
     systemProperties 'property': 'value'
 }
+
+uploadArchives {
+    repositories {
+           flatDir {
+                      dirs 'repos'
+                  }
+        }
+}
