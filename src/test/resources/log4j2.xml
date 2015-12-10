@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+  <Appenders>
+    <RollingFile name="file" fileName="./logs/javaJourney.log" immediateFlush="false" append="false" filePattern="./logs/javaJourney-%d{'%d{yyyy-MM-dd}.log.gz">
+      <PatternLayout pattern="%5p [%t] %d{ISO8601} %F (line %L) %m%n" />
+      <TimeBasedTriggeringPolicy />
+    </RollingFile>
+    <Console name="console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%5p [%t] %d{ISO8601} %F (line %L) %m%n" />
+    </Console>
+  </Appenders>
+  <Loggers>
+    <AsyncLogger name="com.robmarano" level="DEBUG" />
+    <AsyncRoot level="WARN">
+      <AppenderRef ref="file" />
+    </AsyncRoot>
+  </Loggers>
+</Configuration>
+<!--
+<Configuration>
+  <Appenders>
+    <RollingFile name="file" fileName=".${file.separator}logs${file.separator}mylog.log" filePattern=".${file.separator}logs${file.separator}mylog.log-%d{'+values['DatePattern']+'}">
+      <PatternLayout pattern="%5p [%t] %d{ISO8601} %F (line %L) %m%n" />
+      <TimeBasedTriggeringPolicy />
+    </RollingFile>
+    <Console name="console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%5p [%t] %d{ISO8601} %F (line %L) %m%n" />
+    </Console>
+  </Appenders>
+  <Loggers>
+    <AsyncLogger name="com.robmarano" level="DEBUG" />
+    <AsyncRoot level="WARN">
+      <AppenderRef ref="file" />
+    </AsyncRoot>
+  </Loggers>
+</Configuration>
+-->

@@ -1,4 +1,29 @@
 apply plugin: 'java'
+apply plugin: 'eclipse'
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+defaultTasks 'build'
+
+task cleanLog(type: Delete) { delete fileTree(dir: './logs', include: '*.log') }
+def allCleanTasks = getTasksByName('clean', true)
+def allBuildTasks = getTasksByName('build', true)
+
+task cleanAll {
+  dependsOn cleanLog
+  dependsOn clean
+}
+
+task run(type: JavaExec) {
+    dependsOn cleanLog
+    dependsOn allBuildTasks
+    workingDir = '.'; jvmArgs = ['-server', '-XX:MaxPermSize=192m', '-XX:-OmitStackTraceInFastThrow']; maxHeapSize = '256M'
+    //systemProperties = ['moqui.conf':moquiConfDev, 'moqui.runtime':moquiRuntime]
+    // NOTE: this is a hack, using -jar instead of a class name, and then the first argument is the name of the jar file
+    //main = '-jar'; args = [jar.archivePath]
+    main = 'com.robmarano.javaJourney'
+    classpath = sourceSets.main.runtimeClasspath
+}
 
 repositories {
     mavenCentral()
@@ -6,15 +31,26 @@ repositories {
 
 dependencies {
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.4.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.4.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.4.1'
+    // following required to test using AsyncLoggers for Log4j2
+    compile group: 'com.lmax', name: 'disruptor', version: '3.+'
     testCompile group: 'junit', name: 'junit', version: '4.+'
+    // following required to test using AsyncLoggers for Log4j2
+    testCompile group: 'com.lmax', name: 'disruptor', version: '3.+'
 }
 
-sourceCompatibility = 1.5
+sourceCompatibility = 1.7
 version = '1.0'
+
 jar {
+    // the from line pulls in all dependency libraries directly into the jar
+    // so you can run simply as java -jar jarfile.jar
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     manifest {
-            attributes 'Main-Class': 'HelloWorld',
-                       'Implementation-Title': 'Gradle Quickstart',
+            attributes 'Main-Class': 'com.robmarano.javaJourney',
+                       'Implementation-Title': 'Rob\'s Java Journey',
                        'Implementation-Version': version
         }
 }
@@ -31,4 +67,4 @@ uploadArchives {
         }
 }
 
-apply plugin: 'eclipse'
+
