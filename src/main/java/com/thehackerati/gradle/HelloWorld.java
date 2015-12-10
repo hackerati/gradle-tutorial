@@ -1,4 +1,4 @@
-package com.robmarano;
+package com.thehackerati.gradle;
 
 /******************************************************************************
  *  Compilation:  javac HelloWorld.java

@@ -1,4 +1,4 @@
-package com.robmarano;
+package com.thehackerati.gradle;
 
 import org.junit.Before;
 import org.junit.Test;

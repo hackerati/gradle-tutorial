@@ -21,7 +21,7 @@ task run(type: JavaExec) {
     //systemProperties = ['moqui.conf':moquiConfDev, 'moqui.runtime':moquiRuntime]
     // NOTE: this is a hack, using -jar instead of a class name, and then the first argument is the name of the jar file
     //main = '-jar'; args = [jar.archivePath]
-    main = 'com.robmarano.javaJourney'
+    main = 'com.thehackerati.gradle.javaJourney'
     classpath = sourceSets.main.runtimeClasspath
 }
 
@@ -49,7 +49,7 @@ jar {
     // so you can run simply as java -jar jarfile.jar
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     manifest {
-            attributes 'Main-Class': 'com.robmarano.javaJourney',
+            attributes 'Main-Class': 'com.thehackerati.gradle.javaJourney',
                        'Implementation-Title': 'Rob\'s Java Journey',
                        'Implementation-Version': version
         }

@@ -10,7 +10,7 @@
     </Console>
   </Appenders>
   <Loggers>
-    <AsyncLogger name="com.robmarano" level="DEBUG" />
+    <AsyncLogger name="com.thehackerati.gradle" level="DEBUG" />
     <AsyncRoot level="WARN">
       <AppenderRef ref="file" />
     </AsyncRoot>

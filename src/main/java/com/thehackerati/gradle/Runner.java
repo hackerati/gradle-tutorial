@@ -1,4 +1,4 @@
-package com.robmarano;
+package com.thehackerati.gradle;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
